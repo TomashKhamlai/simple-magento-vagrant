@@ -51,7 +51,7 @@ debconf-set-selections <<< "mysql-apt-config mysql-apt-config/repo-url string ht
 DEBIAN_FRONTEND=noninteractive dpkg -i /vagrant/source/mysql-apt-config_0.8.10-1_all.deb
 
 apt-get update
-apt-get -y --force-yes install php5.6 php5.6-curl php5.6-gd php5.6-mbstring php5.6-mcrypt php5.6-cli php5.6-xml php5.6-mysql php5.6-json php5.6-intl php5.6-soap libaio1 ntp mcrypt expect
+apt-get -y --force-yes install php5.6 php5.6-curl php5.6-gd php5.6-mbstring php5.6-mcrypt php5.6-cli php5.6-xml php5.6-mysql php5.6-json php5.6-intl php5.6-soap libaio1 ntp mcrypt expect php5.6-xdebug
 
 debconf-set-selections <<< "mysql-community-server mysql-community-server/root-pass password 123123q"
 debconf-set-selections <<< "mysql-community-server mysql-community-server/re-root-pass password 123123q"
@@ -107,6 +107,11 @@ phpenmod soap
 phpenmod mbstring
 echo "$VHOST" > /etc/apache2/sites-available/000-default.conf
 service apache2 reload
+
+echo 'xdebug.remote_enable=true
+xdebug.remote_connect_back=true' >> /etc/php/5.6/mods-available/xdebug.ini
+
+rm -rf /etc/php/7* -v
 
 # echo "=================================================="
 # echo "INSTALLING ADMINER"

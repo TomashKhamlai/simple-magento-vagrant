@@ -2,3 +2,4 @@
 vagrant/public_html
 .idea
 vagrant/source
+vagrant/.vagrant
